@@ -1,0 +1,28 @@
+﻿.choose-numbers {
+    display: inline-block;
+}
+
+.choose-number-item {
+    background: #adc0c4;
+    border-radius: 50px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 22px;
+    line-height: 55px;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 55px;
+    margin: 10px 3px;
+    list-style: none;
+}
+
+.choose-number-item:hover {
+    background-color: #3a870d;
+}
+
+.number-checked {
+    background-color: #1fbe29;
+}

@@ -1,0 +1,50 @@
+﻿@inject IJSRuntime js
+<div>
+    <ul class="choose-numbers">
+       @foreach (var dezena in GetVolanteNumeros())
+       {           
+           <li id="@("dezena_"+dezena)"
+               class="choose-number-item" 
+               @onclick="@(() => CheckNumber("dezena_"+dezena))">
+
+               @dezena
+           </li>           
+       }
+    </ul>
+</div>
+
+@code {    
+    
+
+    private async Task CheckNumber(string id)
+    {
+        var isNumberChecked = await js.InvokeAsync<bool>("verifyIfElementIsChecked", id).ConfigureAwait(true);
+
+        if (isNumberChecked)
+        {
+            await js.InvokeVoidAsync("removeElementAsSelectedById", id).ConfigureAwait(true);
+        }
+        else
+        {
+            await js.InvokeVoidAsync("markElementAsSelectedById", id).ConfigureAwait(true);            
+        }
+    } 
+
+    private List<string> GetVolanteNumeros()
+    {
+        var lista = new List<string>();
+
+        for (int i = 1; i <= 25; i++)
+        {
+            var dezena = i.ToString();
+
+            if (dezena.Length == 1){dezena = $"0{dezena}"; }
+
+            lista.Add(dezena);
+        }
+
+        return lista;
+    }
+
+    private string GenerateGuid() => Guid.NewGuid().ToString();
+}
