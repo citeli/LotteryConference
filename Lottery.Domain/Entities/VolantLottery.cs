@@ -4,11 +4,11 @@ namespace Lottery.Domain.Entities
 {
     public class VolantLottery
     {
-        public VolantLottery(LotteryTypeEnum lotteryType)
+        public VolantLottery(LotteryTypeEnum lotteryType, int volantIndex)
         {
             LotteryType = lotteryType;            
             TotalDozens = GetLotteryMaximumDozens(lotteryType);
-            VolantCode = GenerateVolantCode(lotteryType);
+            VolantCode = GenerateVolantCode(lotteryType, volantIndex);
             DozensList = CreateDozensList(TotalDozens, VolantCode);
         }
 
@@ -51,7 +51,7 @@ namespace Lottery.Domain.Entities
             return list;
         }
 
-        private string GenerateVolantCode(LotteryTypeEnum lotteryTypeEnum) => $"{lotteryTypeEnum}_01_";        
+        private string GenerateVolantCode(LotteryTypeEnum lotteryTypeEnum, int volantIndex) => $"{lotteryTypeEnum}_{volantIndex}_";        
 
     }
 }
