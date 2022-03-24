@@ -1,7 +1,9 @@
-﻿@inject IJSRuntime js
+﻿@using Lottery.Domain.Entities
+@using Lottery.Domain.Enums
+@inject IJSRuntime js
 <div>
-    <ul class="choose-numbers">
-       @foreach (var dezena in GetVolanteNumeros())
+    <ul class="choose-numbers">       
+       @foreach (var dezena in GetVolant().Dozens)
        {           
            <li id="@("dezena_"+dezena)"
                class="choose-number-item" 
@@ -27,23 +29,7 @@
         {
             await js.InvokeVoidAsync("markElementAsSelectedById", id).ConfigureAwait(true);            
         }
-    } 
-
-    private List<string> GetVolanteNumeros()
-    {
-        var lista = new List<string>();
-
-        for (int i = 1; i <= 25; i++)
-        {
-            var dezena = i.ToString();
-
-            if (dezena.Length == 1){dezena = $"0{dezena}"; }
-
-            lista.Add(dezena);
-        }
-
-        return lista;
     }
 
-    private string GenerateGuid() => Guid.NewGuid().ToString();
+    private VolantLottery GetVolant() => new VolantLottery(LotteryTypeEnum.Lotofacil);    
 }

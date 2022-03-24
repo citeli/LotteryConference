@@ -4,8 +4,8 @@
     {
         public Bets()
         {
-            Volants = new List<Volant>();
+            Volants = new List<VolantLottery>();
         }
-        public List<Volant> Volants { get; set; }
+        public List<VolantLottery> Volants { get; set; }
     }
 }
