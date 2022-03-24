@@ -9,12 +9,12 @@ namespace Lottery.Domain.Entities
             LotteryType = lotteryType;            
             TotalDozens = GetLotteryMaximumDozens(lotteryType);
             VolantCode = Guid.NewGuid().ToString();
-            Dozens = CreateDozensList(TotalDozens);
+            DozensList = CreateDozensList(TotalDozens, VolantCode);
         }
 
         public string VolantCode { get; private set; }
-        public LotteryTypeEnum LotteryType { get; set; }        
-        public List<string> Dozens { get; private set; }
+        public LotteryTypeEnum LotteryType { get; set; }                
+        public List<DozenVolant> DozensList { get; set; }
         public int TotalDozens { get; private set; }
 
         private int GetLotteryMaximumDozens(LotteryTypeEnum lotteryTypeEnum)
@@ -36,18 +36,20 @@ namespace Lottery.Domain.Entities
             return totalDozens;
         }
 
-        private List<string> CreateDozensList(int totalDozens)
+        private List<DozenVolant> CreateDozensList(int totalDozens, string volantId)
         {
-            var list = new List<string>();
+            var list = new List<DozenVolant>();
 
             for (int i = 1; i <= totalDozens; i++)
             {
                 var dozen = i.ToString();
                 if (dozen.Length == 1) { dozen = $"0{dozen}"; }
-                list.Add(dozen);
+
+                list.Add(new DozenVolant(dozen, volantId));
             }
 
             return list;
         }
+
     }
 }

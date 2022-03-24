@@ -3,13 +3,13 @@
 @inject IJSRuntime js
 <div>
     <ul class="choose-numbers">       
-       @foreach (var dezena in GetVolant().Dozens)
+       @foreach (var dozenVolant in GetVolant().DozensList)
        {           
-           <li id="@("dezena_"+dezena)"
+           <li id="@(dozenVolant.VolantId+"_"+dozenVolant.Dozen)"
                class="choose-number-item" 
-               @onclick="@(() => CheckNumber("dezena_"+dezena))">
+               @onclick="@(() => CheckNumber(dozenVolant.VolantId+"_"+dozenVolant.Dozen))">
 
-               @dezena
+               @dozenVolant.Dozen
            </li>           
        }
     </ul>
