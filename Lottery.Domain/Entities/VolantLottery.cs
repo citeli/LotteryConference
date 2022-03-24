@@ -8,7 +8,7 @@ namespace Lottery.Domain.Entities
         {
             LotteryType = lotteryType;            
             TotalDozens = GetLotteryMaximumDozens(lotteryType);
-            VolantCode = Guid.NewGuid().ToString();
+            VolantCode = GenerateVolantCode(lotteryType);
             DozensList = CreateDozensList(TotalDozens, VolantCode);
         }
 
@@ -50,6 +50,8 @@ namespace Lottery.Domain.Entities
 
             return list;
         }
+
+        private string GenerateVolantCode(LotteryTypeEnum lotteryTypeEnum) => $"{lotteryTypeEnum}_01_";        
 
     }
 }

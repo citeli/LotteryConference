@@ -5,9 +5,9 @@
     <ul class="choose-numbers">       
        @foreach (var dozenVolant in GetVolant().DozensList)
        {           
-           <li id="@(dozenVolant.VolantId+"_"+dozenVolant.Dozen)"
+           <li id="@(dozenVolant.VolantId+dozenVolant.Dozen)"
                class="choose-number-item" 
-               @onclick="@(() => CheckNumber(dozenVolant.VolantId+"_"+dozenVolant.Dozen))">
+               @onclick="@(() => CheckNumber(dozenVolant.VolantId+dozenVolant.Dozen))">
 
                @dozenVolant.Dozen
            </li>           
