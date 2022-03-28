@@ -23,6 +23,10 @@
     background-color: #3a870d;
 }
 
+.choose-number-item:active {
+    background-color: #186303;
+}
+
 .number-checked {
     background-color: #1fbe29;
 }
