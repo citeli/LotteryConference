@@ -2,20 +2,26 @@
 @using Lottery.Domain.Enums
 @inject IJSRuntime js
 <div>
-    <ul class="choose-numbers">       
-       @foreach (var dozenVolant in GetVolant().DozensList)
-       {           
-           <li id="@(dozenVolant.VolantId+dozenVolant.Dozen)"
-               class="choose-number-item" 
-               @onclick="@(() => CheckNumber(dozenVolant.VolantId+dozenVolant.Dozen))">
+    <div>
+        <ul class="choose-numbers">       
+           @foreach (var dozenVolant in GetVolant().DozensList)
+           {           
+               <li id="@(dozenVolant.VolantId+dozenVolant.Dozen)"
+                   class="choose-number-item" 
+                   @onclick="@(() => CheckNumber(dozenVolant.VolantId+dozenVolant.Dozen))">
 
-               @dozenVolant.Dozen
-           </li>           
-       }
-    </ul>
+                   @dozenVolant.Dozen
+               </li>           
+           }       
+        </ul>
+    </div>
+    <div>
+        @totalSelectedDozens Dezenas selecionadas
+    </div>
 </div>
 
 @code {
+    private int totalSelectedDozens = 0;
 
     private async Task CheckNumber(string id)
     {
@@ -24,10 +30,12 @@
         if (isNumberChecked)
         {
             await js.InvokeVoidAsync("removeElementAsSelectedById", id).ConfigureAwait(true);
+            totalSelectedDozens--;
         }
         else
         {
-            await js.InvokeVoidAsync("markElementAsSelectedById", id).ConfigureAwait(true);            
+            await js.InvokeVoidAsync("markElementAsSelectedById", id).ConfigureAwait(true);   
+            totalSelectedDozens++;
         }
     }
 
